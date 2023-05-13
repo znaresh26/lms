@@ -1,0 +1,144 @@
+class manager:
+    def __init__(self):
+        self.pay_details={}
+        self.login_details={}
+        self.book_details={}
+        self.login_page()
+        
+        
+    def login_page(self):
+        choice = int(input("1. Log-in\n2. Sign-up\nEnter Your Choice : "))
+        self.login() if choice==1 else self.signup()
+        
+    def login(self):
+        user_name=input("User-Name : ")
+        password=input("Pasword : ")
+        try:
+            self.login_details[user_name]==password
+            print("Authentication Successful\n")
+            self.menu()
+        except:
+            print("Invalid Credentails")
+            self.login_page()
+            
+    def menu(self):
+        while True:
+            choice= int(input("1. Add Books\n2. Remove Books\n3. Accept Payment\n4. Generate Invoice\n5. Update Books\n6. Exit\nEnter your Choice : "))
+            if choice==1:self.add()
+            if choice==2:self.remove()
+            if choice==3:self.accept_payment()
+            if choice==4:self.invoice()
+            if choice==5:self.update()
+            else:print("Ivalid Input")
+                
+    def signup(self):
+        user_name=input("Create User-Name : ")
+        password=input("Create Pasword : ")
+        self.login_details[user_name]=password
+        print("ID created Successfully\n")
+        self.login()
+        
+    def add(self):
+        book_name=input("Enter Book Name : ")
+        book_id = input("Enter Book Id : ")
+        book_price= int(input("Enter Book price: "))
+        book_quantity=int(input("Enter the count of Books : "))
+        self.book_details[book_name]=[book_id,book_price,book_quantity]
+        print("Book added Successfully\n")
+        
+    def remove(self):
+        book_name=input("Enter Book Name : ")
+        try:
+            del self.book_details[book_name]
+            print("Book Removed Successfully\n")
+        except:
+            print("Invalid Book details\n")
+    
+    def accept_payment(self,books):
+        amount=0
+        for i in books:
+            try:
+                amount+=self.book_details[1]
+            except:print("Book Not found ")
+        
+        print("payment accepted of price ",amount)
+    
+    def invoice(self,books):
+        total=0
+        for i in books:
+            try:
+                print(i,self.book_details[1])
+                total+=self.book_details[1]
+            except:print("Book not found")
+
+        print("Total : ",total)
+            
+            
+    def update(self):
+        book_name=input("Enter Book Name : ")
+        book_id = input("Enter Book Id : ")
+        book_price= int(input("Enter Book price: "))
+        book_quantity=int(input("Enter the count of Books : "))
+        self.book_details[book_name]=[book_id,book_price,book_quantity]
+        print("Book Updated Successfully\n")
+    
+
+class customer:
+    def __init__(self):
+        self.login_details={}
+        self.login_page()
+        
+    def login_page(self):
+        choice = int(input("1. Log-in\n2. Sign-up\nEnter Your Choice : "))
+        self.login() if choice==1 else self.signup()
+        
+    def login(self):
+        user_name=input("User-Name : ")
+        password=input("Pasword : ")
+        try:
+            self.login_details[user_name]==password
+            print("Authentication Successful ")
+        except:
+            print("Invalid Credentails")
+            self.login_page()
+        
+    def signup(self):
+        user_name=input("Create User-Name : ")
+        password=input("Create Pasword : ")
+        self.login_details[user_name]=password
+        print("ID created Successfully")
+        self.login()
+    
+    
+    def view_all(self):
+        for i in manager.book_detils:
+            print("Book Name : ",i)
+            print("Book Id : ",manager.book_detils[i][0])
+            print("Book price : ",manager.book_detils[i][1])
+            print()
+    
+    def pay(self):
+        
+        amount=int(input("enter the amount to be paid"))
+        print("Amount Paid successfully")
+    
+    def view(self):
+        book=input("Enter the book Name")
+        try:
+            print("Book Name : ",book)
+            print("Book Id : ",manager.book_detils[book][0])
+            print("Book price : ",manager.book_detils[book][1])
+            print("Qunatity : ",manager.book_detils[book][2])
+            print()
+        except:
+            print("Book Not found")
+            
+    def rent(self):pass
+    
+class LMS:
+    def __init__(self):
+        choice = int(input("1. Sign-up as Manager\n2. Sign-up as Customer\nEnter Your Choice : "))
+        manager() if choice == 1 else customer()
+        
+
+x= LMS()
